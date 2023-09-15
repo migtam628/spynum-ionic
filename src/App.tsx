@@ -46,7 +46,7 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
-import Recorder from "./VoiceRecorderComponent";
+import Recorder from "./components/VoiceRecorderComponent";
 import Admin from "./pages/Admin";
 
 setupIonicReact();
