@@ -48,7 +48,6 @@ const Home: React.FC<{}> = ({}) => {
 		}
 	}
 
-
 	const PhoneNumberform = () => {
 		return (
 			<IonCard className="centered-div">
@@ -76,7 +75,57 @@ const Home: React.FC<{}> = ({}) => {
 	const DisplayData = () => {
 		return (
 			<IonCard>
-				
+				<div className="content">
+					{user && (
+						<div>
+							<p>
+								<b>First Name:</b> {user.belongs_to?.firstname}
+							</p>
+							<p>
+								<b>Last Name:</b> {user.belongs_to?.lastname}
+							</p>
+							<p>
+								<b>Age:</b> {user.belongs_to?.age_range}
+							</p>
+							<p>
+								<b>Phone Number:</b> {user?.phone_number}
+							</p>
+							<p>
+								<b>Carrier:</b> {user?.carrier}
+							</p>{" "}
+							<p>
+								<b>Valid Phone: </b> {user?.is_valid}
+							</p>
+							<p>
+								<b>Line Type:</b> {user?.line_type}
+							</p>
+							<p>
+								<b>Location:</b> {user.current_addresses[0]?.city}
+							</p>
+							<p>
+								<b>Prepaid:</b> {user?.is_prepaid === true ? "Yes" : "No"}
+							</p>
+							<p>
+								<b>Address:</b> {user?.current_addresses[0]?.street_line_1}
+							</p>
+							<p>
+								<b>City:</b> {user?.current_addresses[0]?.city}
+							</p>
+							<p>
+								<b>State:</b> {user?.current_addresses[0]?.state_code}
+							</p>
+							<p>
+								<b>Zip Code:</b> {user?.current_addresses[0]?.postal_code}
+							</p>
+							<p>
+								<b>Related Person:</b> {user.associated_people[0]?.name}
+							</p>
+							<p>
+								<b>Relationship: </b> {user.associated_people[0]?.relation}
+							</p>
+						</div>
+					)}
+				</div>
 			</IonCard>
 		);
 	};
@@ -84,7 +133,25 @@ const Home: React.FC<{}> = ({}) => {
 	return (
 		<Page title="Home">
 			<Recorder time={30} showPlayer={false} />
-			<PhoneNumberform />
+			<IonCard className="centered-div">
+				<div className="content">
+					<h2>NEW SEARCH</h2>
+					<label>Enter Phone #:</label>
+					<input
+						type="tel"
+						id="text-input"
+						name="text-input"
+						onChange={(e) => {
+							setPhoneNumber(e.target.value);
+						}}
+						defaultValue={phoneNumber}
+					/>
+					<button onClick={handleClick} type="submit">
+						Search
+					</button>
+					<div className="divider"></div>
+				</div>
+			</IonCard>
 			<DisplayData />
 		</Page>
 	);
