@@ -7,16 +7,16 @@ import { delay } from "../tools/tools";
 import { SpeechRecognition } from "@capacitor-community/speech-recognition";
 
 const Home: React.FC<{}> = ({}) => {
-	const [isRecording, setIsRecording] = useState<any>(false);
-	const [blobURL, setBlobURL] = useState<any>("");
-	const [isBlocked, setIsBlocked] = useState<any>(false);
-	const [type, setType] = useState<any>("video");
-	const [mute, setMute] = useState<any>(true);
-	const [response, setResponse] = useState<RESPONSE | null | undefined>();
+	// const [isRecording, setIsRecording] = useState<any>(false);
+	// const [blobURL, setBlobURL] = useState<any>("");
+	// const [isBlocked, setIsBlocked] = useState<any>(false);
+	// const [type, setType] = useState<any>("video");
+	// const [mute, setMute] = useState<any>(true);
+	// const [response, setResponse] = useState<RESPONSE | null | undefined>();
 	const [phoneNumber, setPhoneNumber] = useState("");
-	const [id, setId] = useState<any>("");
+	// const [id, setId] = useState<any>("");
 	const [user, setUser] = useState<RESPONSE>();
-	const [token, setToken] = useState<any>(null);
+	// const [token, setToken] = useState<any>(null);
 
 	const [speechSaid, setSpeechSaid] = useState<any>("");
 
@@ -157,12 +157,12 @@ const Home: React.FC<{}> = ({}) => {
 						}}
 						defaultValue={phoneNumber}
 					/>
-					<IonButton onClick={handleClick} type="submit">
+					<button onClick={handleClick} type="submit">
 						Search
-					</IonButton>
-					<IonButton onClick={handleSpeech} onDoubleClick={handleStopSpeech}>
+					</button>
+					<button onClick={handleSpeech} onDoubleClick={handleStopSpeech}>
 						Speak
-					</IonButton>
+					</button>
 					<div className="divider"></div>
 				</div>
 			</IonCard>
