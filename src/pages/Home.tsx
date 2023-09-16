@@ -59,8 +59,8 @@ const Home: React.FC<{}> = ({}) => {
 			phoneNumber,
 		init: {
 			headers: {
-				Authorization: "Bearer 2109|WPTZXEwyyPoqvc5iin6ms8ItbCCpbCFxEikrUZlR",
-				// Authorization: "Bearer 2158|5FpmWvjE8u3JAU5bwWzkLmi00kjio0rFNCigZEPO",
+				// Authorization: "Bearer 2109|WPTZXEwyyPoqvc5iin6ms8ItbCCpbCFxEikrUZlR",
+				Authorization: "Bearer 2158|5FpmWvjE8u3JAU5bwWzkLmi00kjio0rFNCigZEPO",
 			},
 		},
 	};
