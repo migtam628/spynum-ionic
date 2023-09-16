@@ -52,9 +52,8 @@ const Admin: React.FC = () => {
 	}, []);
 	function playBase64(base64: string) {
 		const base: string = base64;
-		const mimeType = base.includes("base64,//")
-			? "audio/acc"
-			: "audio/webm;codecs=opus";
+		const mimeType = base?.substring(base.indexOf(":") + 1, base.indexOf(";"));
+		console.log({ mimeType });
 		const mediaSource = new MediaSource();
 		const audio: any = document.getElementById("audio-player");
 		if (base64 === "") return;

@@ -5,6 +5,8 @@ PODS:
     - Capacitor
   - CapacitorBackgroundRunner (1.0.5):
     - Capacitor
+  - CapacitorCommunitySpeechRecognition (2.1.0):
+    - Capacitor
   - CapacitorCordova (5.3.0)
   - CapacitorDevice (5.0.6):
     - Capacitor
@@ -21,6 +23,7 @@ DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorApp (from `../../node_modules/@capacitor/app`)"
   - "CapacitorBackgroundRunner (from `../../node_modules/@capacitor/background-runner`)"
+  - "CapacitorCommunitySpeechRecognition (from `../../node_modules/@capacitor-community/speech-recognition`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorDevice (from `../../node_modules/@capacitor/device`)"
   - "CapacitorHaptics (from `../../node_modules/@capacitor/haptics`)"
@@ -35,6 +38,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/app"
   CapacitorBackgroundRunner:
     :path: "../../node_modules/@capacitor/background-runner"
+  CapacitorCommunitySpeechRecognition:
+    :path: "../../node_modules/@capacitor-community/speech-recognition"
   CapacitorCordova:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorDevice:
@@ -52,6 +57,7 @@ SPEC CHECKSUMS:
   Capacitor: 1ac9165943bc4f2137642d218c5ba05df811de69
   CapacitorApp: 024e1b1bea5f883d79f6330d309bc441c88ad04a
   CapacitorBackgroundRunner: f2415aebbcea4e744eb45f785a50f07ba72f1d0b
+  CapacitorCommunitySpeechRecognition: b404ef82fa846dd48f6417eb0c47955645ca0996
   CapacitorCordova: b9374d68e63ce29e96ab5db994cf14fbefd722c9
   CapacitorDevice: 2c968f98a1ec4d22357418c1521e7ddc46c675e6
   CapacitorHaptics: 1fffc1217c7e64a472d7845be50fb0c2f7d4204c
@@ -59,6 +65,6 @@ SPEC CHECKSUMS:
   CapacitorStatusBar: 565c0a1ebd79bb40d797606a8992b4a105885309
   CapacitorVoiceRecorder: 872ea857b497ce2c71afe3e4eb5de0a74290c0db
 
-PODFILE CHECKSUM: 97ac3905a43f23dd5750f5d3dd0c60546e25cfbd
+PODFILE CHECKSUM: f002645869d41085c641f6c505b14d937193e9bd
 
 COCOAPODS: 1.12.1

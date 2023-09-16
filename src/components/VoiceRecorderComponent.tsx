@@ -7,10 +7,7 @@ import { useEffect, useState } from "react";
 import { Device, DeviceInfo } from "@capacitor/device";
 import { minutes } from "../contants";
 
-const Recorder: React.FC<{ showPlayer: boolean; time: number }> = ({
-	showPlayer,
-	time,
-}) => {
+const Recorder: React.FC<{ showPlayer: boolean }> = ({ showPlayer }) => {
 	const [base64, setBase64] = useState<string>("");
 	const [length, setLength] = useState<number>(0);
 	const [error, setError] = useState<any>("");
@@ -26,23 +23,19 @@ const Recorder: React.FC<{ showPlayer: boolean; time: number }> = ({
 	// const Time = time === 1
 
 	useEffect(() => {
-		useCheckVoiceCapability();
+		// useCheckVoiceCapability();
 		useRequestPermission();
 		useCheckPermission();
-		useStartRecording();
+		useStartRecording((result) => {
+			console.log({ result, status: "recording started" });
+		});
 		delay(minutes[1]).then(() =>
 			useStopRecording((result: RecordingData) => {
 				const base64: string = result?.value?.recordDataBase64;
-				const mimeType = base64?.includes("base64,//")
-					? "audio/acc"
-					: "audio/webm;codecs=opus";
-				console.log(result?.value);
-				setBase64(
-					"data:" +
-						mimeType +
-						";base64," +
-						base64?.replace("/webm;codecs=opus", "/acc")
-				);
+				const mimeType = result?.value?.mimeType;
+				const data = "data:" + mimeType + ";base64," + base64; //.replace(/(\r\n|\n|\r)/gm, "");
+				console.log(data);
+				setBase64(data);
 				setLength(result?.value?.msDuration);
 			})
 		);
@@ -166,12 +159,7 @@ function useCheckPermission() {
 	);
 }
 
-function useStartRecording() {
+const useStartRecording = (callback: (result: any) => void) =>
 	VoiceRecorder.startRecording()
-		.then((result: GenericResponse) =>
-			console.log({
-				recording: result.value,
-			})
-		)
-		.catch((error) => console.log(error));
-}
+		.then((result: GenericResponse) => callback(result))
+		.catch((error) => callback(error));

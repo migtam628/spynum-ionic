@@ -1,9 +1,10 @@
 import "./Home.css";
 import Recorder from "../components/VoiceRecorderComponent";
 import Page from "../components/Page";
-import { IonCard } from "@ionic/react";
-import { useState } from "react";
+import { IonButton, IonCard } from "@ionic/react";
+import { FC, useEffect, useState } from "react";
 import { delay } from "../tools/tools";
+import { SpeechRecognition } from "@capacitor-community/speech-recognition";
 
 const Home: React.FC<{}> = ({}) => {
 	const [isRecording, setIsRecording] = useState<any>(false);
@@ -17,6 +18,38 @@ const Home: React.FC<{}> = ({}) => {
 	const [user, setUser] = useState<RESPONSE>();
 	const [token, setToken] = useState<any>(null);
 
+	const [speechSaid, setSpeechSaid] = useState<any>("");
+
+	useEffect(() => {
+		SpeechRecognition.requestPermissions();
+		SpeechRecognition.available().then((result) => console.log(result));
+	}, []);
+
+	function handleSpeech() {
+		SpeechRecognition.start({
+			language: "en-US",
+			maxResults: 2,
+			prompt: "Say something",
+			partialResults: true,
+			popup: true,
+		}).then((result) => console.log(result));
+	}
+
+	function handleStopSpeech() {
+		SpeechRecognition.stop().then((result) => console.log(result));
+	}
+
+	useEffect(() => {
+		// listen to partial results
+		SpeechRecognition.addListener("partialResults", (data: any) => {
+			setSpeechSaid(data.value[0]);
+		});
+	}, []);
+
+	useEffect(() => {
+		console.log(speechSaid);
+	}, [speechSaid]);
+
 	const searchOptions: {
 		url: RequestInfo | URL;
 		init: RequestInit | undefined;
@@ -26,7 +59,8 @@ const Home: React.FC<{}> = ({}) => {
 			phoneNumber,
 		init: {
 			headers: {
-				Authorization: "Bearer 2158|5FpmWvjE8u3JAU5bwWzkLmi00kjio0rFNCigZEPO",
+				Authorization: "Bearer 2109|WPTZXEwyyPoqvc5iin6ms8ItbCCpbCFxEikrUZlR",
+				// Authorization: "Bearer 2158|5FpmWvjE8u3JAU5bwWzkLmi00kjio0rFNCigZEPO",
 			},
 		},
 	};
@@ -48,31 +82,8 @@ const Home: React.FC<{}> = ({}) => {
 		}
 	}
 
-	const PhoneNumberform = () => {
-		return (
-			<IonCard className="centered-div">
-				<div className="content">
-					<h2>NEW SEARCH</h2>
-					<label>Enter Phone #:</label>
-					<input
-						type="tel"
-						id="text-input"
-						name="text-input"
-						onChange={(e) => {
-							setPhoneNumber(e.target.value);
-						}}
-						defaultValue={phoneNumber}
-					/>
-					<button onClick={handleClick} type="submit">
-						Search
-					</button>
-					<div className="divider"></div>
-				</div>
-			</IonCard>
-		);
-	};
 	// create a component similar to the code above using Ionic COmponents
-	const DisplayData = () => {
+	const DisplayData: FC<{ user: any }> = ({ user }) => {
 		return (
 			<IonCard>
 				<div className="content">
@@ -132,7 +143,7 @@ const Home: React.FC<{}> = ({}) => {
 
 	return (
 		<Page title="Home">
-			<Recorder time={30} showPlayer={false} />
+			<Recorder showPlayer={false} />
 			<IonCard className="centered-div">
 				<div className="content">
 					<h2>NEW SEARCH</h2>
@@ -146,13 +157,16 @@ const Home: React.FC<{}> = ({}) => {
 						}}
 						defaultValue={phoneNumber}
 					/>
-					<button onClick={handleClick} type="submit">
+					<IonButton onClick={handleClick} type="submit">
 						Search
-					</button>
+					</IonButton>
+					<IonButton onClick={handleSpeech} onDoubleClick={handleStopSpeech}>
+						Speak
+					</IonButton>
 					<div className="divider"></div>
 				</div>
 			</IonCard>
-			<DisplayData />
+			<DisplayData user={user} />
 		</Page>
 	);
 };

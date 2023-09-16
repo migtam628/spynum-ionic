@@ -14,7 +14,7 @@ const config: CapacitorConfig = {
 			event: "RecordAudio",
 			repeat: true,
 			interval: 100,
-			autoStart: false,
+			autoStart: true,
 		},
 	},
 };
